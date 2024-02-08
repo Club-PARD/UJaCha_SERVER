@@ -11,13 +11,11 @@ public class UserDTO {
     public static class Create{
         private String kakaoId;
         private String email;
-        private String nickName;
 
         public static Create toDTO(final KakaoResponse response) {
             return Create.builder()
                     .kakaoId(response.getProviderId())
                     .email(response.getEmail())
-                    .nickName(response.getName())
                     .build();
         }
     }
@@ -28,5 +26,7 @@ public class UserDTO {
         private Integer childAge;
         private String nickName;
         private String reliableName;
+
     }
+
 }
