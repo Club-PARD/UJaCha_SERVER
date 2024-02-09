@@ -18,5 +18,6 @@ public class MemberRequestDTO {
         private String nickname;
         private String reliableName;
         private Integer childAge;
+        private String uid;
     }
 }

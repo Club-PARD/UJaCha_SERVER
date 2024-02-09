@@ -1,6 +1,7 @@
 package com.ujacha.tune.member.domain;
 
 import com.ujacha.tune.member.dto.MemberRequestDTO;
+import com.ujacha.tune.member.dto.MemberResponseDTO;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -20,7 +21,7 @@ public class Member {
     private String uid;
     @Column(nullable = false, unique = true)
     private String email;
-
+    @Column(unique = true)
     private String nickname;
     private String reliableName;
     private Integer childAge;
@@ -30,6 +31,12 @@ public class Member {
                 .uid(dto.getUid())
                 .email(dto.getEmail())
                 .build();
+    }
+
+    public void updateCategory(MemberRequestDTO.FirstLogin dto) {
+        this.nickname = dto.getNickname();
+        this.reliableName = dto.getReliableName();
+        this.childAge = dto.getChildAge();
     }
 
 }
