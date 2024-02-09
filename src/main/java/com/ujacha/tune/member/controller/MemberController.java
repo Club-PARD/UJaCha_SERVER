@@ -20,7 +20,8 @@ public class MemberController {
         return memberService.login(dto);
     }
     @PostMapping("/first")
-    public void first(@RequestBody MemberRequestDTO.FirstLogin dto) {
-        memberService.firstLogin(dto);
+    public String first(@RequestBody MemberRequestDTO.FirstLogin dto) {
+        return memberService.firstLogin(dto);
     }
+
 }

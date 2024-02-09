@@ -23,13 +23,14 @@ public class MemberService {
     }
 
     @Transactional
-    public void firstLogin(MemberRequestDTO.FirstLogin dto) {
+    public String firstLogin(MemberRequestDTO.FirstLogin dto) {
         if (!isFirst(dto.getUid())) {
             throw new IllegalStateException("This is not the first login for UID: " + dto.getUid());
         }
         Member member = memberRepository.findByUid(dto.getUid())
                 .orElseThrow(NullPointerException::new);
         member.updateCategory(dto);
+        return token(member.getEmail());
     }
 
     public boolean isFirst(String uid) {
