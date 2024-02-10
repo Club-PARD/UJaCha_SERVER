@@ -15,11 +15,11 @@ import java.util.Date;
 public class TokenProvider {
     private static final Key SECURITY_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS512);
 
-    public String create(String Email){
+    public String create(String Uid){
         Date exprTime = Date.from(Instant.now().plus(1, ChronoUnit.HOURS));
         return Jwts.builder()
                 .signWith(SECURITY_KEY)
-                .setSubject(Email)
+                .setSubject(Uid)
                 .setIssuedAt(new Date())
                 .setExpiration(exprTime)
                 .compact();

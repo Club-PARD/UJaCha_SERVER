@@ -16,7 +16,8 @@ import lombok.experimental.SuperBuilder;
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "nameId")
+    private Long nameId;
     @Column(nullable = false, unique = true)
     private String uid;
     @Column(nullable = false, unique = true)

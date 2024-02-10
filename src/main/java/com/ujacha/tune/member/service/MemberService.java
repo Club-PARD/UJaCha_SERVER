@@ -30,15 +30,15 @@ public class MemberService {
         Member member = memberRepository.findByUid(dto.getUid())
                 .orElseThrow(NullPointerException::new);
         member.updateCategory(dto);
-        return token(member.getEmail());
+        return token(member.getUid());
     }
 
     public boolean isFirst(String uid) {
         return (memberRepository.findByUid(uid).orElseThrow().getNickname() == null);
     }
 
-    public String token(String email) {
-        return tokenProvider.create(email);
+    public String token(String uid) {
+        return tokenProvider.create(uid);
     }
 
     public MemberResponseDTO login(MemberRequestDTO.KakaoLogin dto) {
