@@ -16,7 +16,7 @@ public class ResponseDTO {
     private int symptom2;
     private int symptom3;
     private int symptom4;
-    private int symptom5;
+
     private int total;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
