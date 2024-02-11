@@ -1,21 +1,34 @@
 package com.ujacha.tune.test.service;
 
+import com.ujacha.tune.auth.jwt.TokenProvider;
+import com.ujacha.tune.member.repository.MemberRepository;
 import com.ujacha.tune.test.domain.TestEntity;
 import com.ujacha.tune.test.dto.TestRequestDTO;
 import com.ujacha.tune.test.dto.TestResponseDTO;
 import com.ujacha.tune.test.repository.TestRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class TestService {
 
     private final TestRepository testRepository;
+    private final MemberRepository memberRepository;
+    private final TokenProvider tokenProvider;
 
-    public TestResponseDTO.Response testToResult(TestRequestDTO dto) {
-        TestEntity test=testRepository.save(TestEntity.testToResult(answerToTest(dto)));
+    public TestResponseDTO.Response testToResult(TestRequestDTO dto, String jwt) {
+        TestEntity test = testRepository.save(TestEntity.testToResult(answerToTest(dto),
+                memberRepository.findByUid(tokenProvider.validate(jwt)).orElseThrow()));
         return TestResponseDTO.Response.toDto(test);
+    }
+
+    public TestResponseDTO.Response firstTest(TestRequestDTO dto) {
+        return TestResponseDTO.Response.first(answerToTest(dto));
     }
 
     public TestResponseDTO.Symptom answerToTest(TestRequestDTO dto) {
@@ -41,4 +54,13 @@ public class TestService {
             default -> 10;
         };
     }
+
+    public List<TestResponseDTO.Response> listTestEntityToDTo(String jwt) {
+        Long memberId = memberRepository.findByUid(tokenProvider.validate(jwt)).orElseThrow().getId();
+        return testRepository.findByMemberId(memberId)
+                .stream()
+                .map(TestResponseDTO.Response::toDto)
+                .collect(Collectors.toList());
+    }
+
 }

@@ -57,6 +57,15 @@ public class TestResponseDTO {
                     .date(test.getDate())
                     .build();
         }
+        public static Response first(TestResponseDTO.Symptom dto) {
+            return Response.builder()
+                    .hallucination(dto.getHallucination())
+                    .abnormalBehavior(dto.getAbnormalBehavior())
+                    .moody(dto.getMoody())
+                    .delusion(dto.getDelusion())
+                    .total((dto.getHallucination() + dto.getAbnormalBehavior() + dto.getDelusion() + dto.getMoody()) / 4)
+                    .build();
+        }
     }
 
 }
