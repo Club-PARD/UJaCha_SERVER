@@ -35,7 +35,7 @@ public class SecurityConfig {
                 .sessionManagement((sessionManagement) -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 // "/" "/api/auth" 모듈에 대해서는 모두 허용 (인증을 하지 않고 사용 가능하게 함)
                 .authorizeHttpRequests((authorizeHttpRequests) ->
-                        authorizeHttpRequests.requestMatchers("/", "/api/member/**")
+                        authorizeHttpRequests.requestMatchers("/", "/api/member/**","/api/test/**")
                                 .permitAll()
                                 //나머지 REquest에 대해서는 모두 인증된 사용자만 사용가능하게함
                                 .anyRequest().authenticated());

@@ -5,6 +5,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.security.Key;
 import java.time.Instant;
@@ -25,10 +26,17 @@ public class TokenProvider {
                 .compact();
     }
     public String validate(String token){
+        if (!StringUtils.hasText(token)) {
+            throw new IllegalArgumentException("Token must not be null or empty");
+        }
+        String token1 = token;
+        if(token1.startsWith("Bearer ")) {
+            token1 = token1.substring(7);
+        }
         Claims claims = Jwts.parserBuilder()
                 .setSigningKey(SECURITY_KEY)
                 .build()
-                .parseClaimsJws(token)
+                .parseClaimsJws(token1)
                 .getBody();
         return claims.getSubject();
     }
