@@ -2,12 +2,16 @@ package com.ujacha.tune.member.domain;
 
 import com.ujacha.tune.member.dto.MemberRequestDTO;
 import com.ujacha.tune.member.dto.MemberResponseDTO;
+import com.ujacha.tune.test.domain.TestEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -16,8 +20,8 @@ import lombok.experimental.SuperBuilder;
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "nameId")
-    private Long nameId;
+    @Column(name = "member_id")
+    private Long id;
     @Column(nullable = false, unique = true)
     private String uid;
     @Column(nullable = false, unique = true)
@@ -26,6 +30,9 @@ public class Member {
     private String nickname;
     private String reliableName;
     private Integer childAge;
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TestEntity> test = new ArrayList<>();
 
     public static Member toEntity(MemberRequestDTO.KakaoLogin dto) {
         return Member.builder()

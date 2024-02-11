@@ -1,24 +1,53 @@
 package com.ujacha.tune.member.dto;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import com.ujacha.tune.member.domain.Member;
 
-@Getter
-@Setter
-@Builder
+import com.ujacha.tune.test.dto.TestResponseDTO;
+import com.ujacha.tune.test.service.TestService;
+import lombok.*;
+
+import java.util.List;
+
+@RequiredArgsConstructor
 public class MemberResponseDTO {
-    private boolean isFirst;
-    private String token;
-    private int exprTime;
+    @Getter
+    @Setter
+    @Builder
+    public static class Token{
+        private boolean isFirst;
+        private String token;
+        private int exprTime;
+        public static Token toDTO(boolean isFirst,
+                                              String token,
+                                              int exprTime) {
+            return Token.builder()
+                    .isFirst(isFirst)
+                    .token(token)
+                    .exprTime(exprTime)
+                    .build();
+        }
+    }
 
-    public static MemberResponseDTO toDTO(boolean isFirst,
-                                          String token,
-                                          int exprTime) {
-        return MemberResponseDTO.builder()
-                .isFirst(isFirst)
-                .token(token)
-                .exprTime(exprTime)
-                .build();
+    @Getter
+    @Setter
+    @Builder
+    public static class Check {
+        private String uid;
+        private String email;
+        private String nickname;
+        private String reliableName;
+        private Integer childAge;
+        private List<TestResponseDTO.Response> test;
+
+        public static Check toDTO(Member member, List<TestResponseDTO.Response> test) {
+            return Check.builder()
+                    .uid(member.getUid())
+                    .email(member.getEmail())
+                    .nickname(member.getNickname())
+                    .reliableName(member.getReliableName())
+                    .childAge(member.getChildAge())
+                    .test(test)
+                    .build();
+        }
     }
 }
