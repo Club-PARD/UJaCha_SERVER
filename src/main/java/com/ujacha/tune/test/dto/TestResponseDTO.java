@@ -1,6 +1,7 @@
 package com.ujacha.tune.test.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.ujacha.tune.test.domain.TestEntity;
 import lombok.Builder;
 import lombok.Getter;
@@ -30,6 +31,7 @@ public class TestResponseDTO {
     @Getter
     @Setter
     @Builder
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public static class Response {
         private Long testId;
         //환각, 환청
@@ -57,8 +59,24 @@ public class TestResponseDTO {
                     .date(test.getDate())
                     .build();
         }
-        public static Response first(TestResponseDTO.Symptom dto) {
-            return Response.builder()
+
+    }
+
+    @Getter
+    @Builder
+    public static class First {
+        //환각, 환청
+        private int hallucination;
+        //이상행동
+        private int abnormalBehavior;
+        //감정변화
+        private int moody;
+        //망상
+        private int delusion;
+
+        private int total;
+        public static First first(TestResponseDTO.Symptom dto) {
+            return First.builder()
                     .hallucination(dto.getHallucination())
                     .abnormalBehavior(dto.getAbnormalBehavior())
                     .moody(dto.getMoody())
@@ -67,5 +85,6 @@ public class TestResponseDTO {
                     .build();
         }
     }
+
 
 }

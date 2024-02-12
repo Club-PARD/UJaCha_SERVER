@@ -51,5 +51,15 @@ public class TestEntity {
                 .member(member)
                 .build();
     }
+    public static TestEntity testToResult(TestResponseDTO.First dto, Member member) {
+        return TestEntity.builder()
+                .hallucination(dto.getHallucination())
+                .abnormalBehavior(dto.getAbnormalBehavior())
+                .moody(dto.getMoody())
+                .delusion(dto.getDelusion())
+                .total((dto.getHallucination() + dto.getAbnormalBehavior() + dto.getDelusion() + dto.getMoody()) / 4)
+                .member(member)
+                .build();
+    }
 
 }

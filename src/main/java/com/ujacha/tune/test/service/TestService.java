@@ -8,7 +8,6 @@ import com.ujacha.tune.test.dto.TestResponseDTO;
 import com.ujacha.tune.test.repository.TestRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,8 +26,8 @@ public class TestService {
         return TestResponseDTO.Response.toDto(test);
     }
 
-    public TestResponseDTO.Response firstTest(TestRequestDTO dto) {
-        return TestResponseDTO.Response.first(answerToTest(dto));
+    public TestResponseDTO.First firstTest(TestRequestDTO dto) {
+        return TestResponseDTO.First.first(answerToTest(dto));
     }
 
     public TestResponseDTO.Symptom answerToTest(TestRequestDTO dto) {
@@ -61,6 +60,12 @@ public class TestService {
                 .stream()
                 .map(TestResponseDTO.Response::toDto)
                 .collect(Collectors.toList());
+    }
+
+    public TestResponseDTO.Response firstResultToSave(TestResponseDTO.First dto, String jwt) {
+        TestEntity test = testRepository.save(TestEntity.testToResult(dto,
+                memberRepository.findByUid(tokenProvider.validate(jwt)).orElseThrow()));
+        return TestResponseDTO.Response.toDto(test);
     }
 
 }
