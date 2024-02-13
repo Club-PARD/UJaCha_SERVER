@@ -3,7 +3,6 @@ package com.ujacha.tune.member.dto;
 import com.ujacha.tune.member.domain.Member;
 
 import com.ujacha.tune.test.dto.TestResponseDTO;
-import com.ujacha.tune.test.service.TestService;
 import lombok.*;
 
 import java.util.List;

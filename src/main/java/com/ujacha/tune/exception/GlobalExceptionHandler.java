@@ -6,8 +6,6 @@ import org.springframework.security.oauth2.jwt.JwtException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.nio.file.AccessDeniedException;
-import java.nio.file.NoSuchFileException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.NoSuchElementException;
 

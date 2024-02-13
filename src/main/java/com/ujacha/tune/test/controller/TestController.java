@@ -31,7 +31,7 @@ public class TestController {
     @Operation(summary = "로그인 한 후 첫 번째 Test",
             description = "결과와 jwt를 받고 그를 데이터베이스에 저장합니다.")
     @PostMapping("/first")
-    public TestResponseDTO.Response firstResultToSave(@RequestBody TestResponseDTO.First dto, @RequestHeader String jwt) {
+    public TestResponseDTO.Response firstResultToSave(@RequestBody TestResponseDTO.First dto, @RequestHeader(value = "Authorization") String jwt) {
         return testService.firstResultToSave(dto, jwt);
     }
 }

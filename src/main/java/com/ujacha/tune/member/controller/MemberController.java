@@ -8,7 +8,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @Tag(name = "member 컨트롤러" , description = "멤버 로그인과 조회 컨트롤러입니다.")
 @RestController

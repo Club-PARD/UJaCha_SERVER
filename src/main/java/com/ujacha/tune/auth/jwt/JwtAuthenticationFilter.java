@@ -1,6 +1,5 @@
 package com.ujacha.tune.auth.jwt;
 
-import com.nimbusds.jose.jwk.JWKException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

@@ -1,11 +1,9 @@
 package com.ujacha.tune.member.domain;
 
 import com.ujacha.tune.member.dto.MemberRequestDTO;
-import com.ujacha.tune.member.dto.MemberResponseDTO;
 import com.ujacha.tune.test.domain.TestEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
