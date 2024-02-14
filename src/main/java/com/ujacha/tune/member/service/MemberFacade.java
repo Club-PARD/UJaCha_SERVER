@@ -53,4 +53,11 @@ public class MemberFacade {
         return memberService.nicknameDuplicate(nickname);
     }
 
+    @Transactional
+    public String update(MemberRequestDTO.MemberUpdate dto, String jwt) {
+        Member member = memberService.findByJwt(jwt);
+        member.updateMember(dto);
+        return "업데이트 성공!";
+    }
+
 }

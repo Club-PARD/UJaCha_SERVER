@@ -31,7 +31,7 @@ public class Member {
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TestEntity> test = new ArrayList<>();
-    
+
 
     public static Member toEntity(MemberRequestDTO.KakaoLogin dto) {
         return Member.builder()
@@ -45,4 +45,9 @@ public class Member {
         this.childAge = dto.getChildAge();
     }
 
+    public void updateMember(MemberRequestDTO.MemberUpdate dto) {
+        this.nickname = dto.getNickname();
+        this.childAge = dto.getChildAge();
+        this.reliableName = dto.getReliableName();
+    }
 }

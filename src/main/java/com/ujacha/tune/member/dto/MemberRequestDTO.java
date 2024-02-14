@@ -23,7 +23,7 @@ public class MemberRequestDTO {
     @Setter
     public static class MemberUpdate {
         private String nickname;
-        private String reliableUid;
+        private String reliableName;
         private Integer childAge;
     }
 }

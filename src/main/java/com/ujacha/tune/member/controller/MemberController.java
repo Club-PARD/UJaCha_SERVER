@@ -43,5 +43,12 @@ public class MemberController {
     public MemberResponseDTO.Check member(@RequestHeader(value = "Authorization" , required = false) String jwt) {
         return memberFacade.userCheck(jwt);
     }
+    @Operation(summary = "회원 업데이트",
+            description = "JWT로 회원을 조회하여 회원정보와 Body를 이용하여 회원을 업데이트 합니다.")
+    @PatchMapping("/update")
+    public String updateMember(@RequestBody MemberRequestDTO.MemberUpdate dto,
+            @RequestHeader(value = "Authorization" , required = false) String jwt) {
+        return memberFacade.update(dto,jwt);
+    }
 
 }
