@@ -20,7 +20,7 @@ public class MemberFacade {
     @Transactional
     public String firstLogin(MemberRequestDTO.FirstLogin dto) {
         if (!memberService.isFirst(dto.getUid())) {
-            throw new IllegalStateException("처음 로그인한 유저가 아닙니다.: " + dto.getUid());
+            throw new IllegalStateException("처음 로그인한 유저가 아닙니다 : " + dto.getUid());
         }
         Member member = memberService.findByUid(dto.getUid());
         member.firstLoginCategory(dto);
@@ -32,10 +32,16 @@ public class MemberFacade {
             memberService.create(dto);
         }
         if (memberService.isFirst(dto.getUid())) {
-            return MemberResponseDTO.Token.toDTO(memberService.isFirst(dto.getUid()), null, 0);
+            return MemberResponseDTO.Token
+                    .toDTO(memberService.isFirst(dto.getUid()),
+                    null,
+                    0);
         }
 
-        return MemberResponseDTO.Token.toDTO(memberService.isFirst(dto.getUid()), memberService.token(dto.getUid()), 3600000);
+        return MemberResponseDTO.Token
+                .toDTO(memberService.isFirst(dto.getUid()),
+                        memberService.token(dto.getUid()),
+                        3600000);
     }
 
     public MemberResponseDTO.Check userCheck(String jwt) {
