@@ -1,8 +1,6 @@
 package com.ujacha.tune.test.service.core;
 
-import com.ujacha.tune.auth.jwt.TokenProvider;
 import com.ujacha.tune.member.domain.Member;
-import com.ujacha.tune.member.repository.MemberRepository;
 import com.ujacha.tune.test.domain.TestEntity;
 import com.ujacha.tune.test.dto.TestRequestDTO;
 import com.ujacha.tune.test.dto.TestResponseDTO;

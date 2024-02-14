@@ -25,7 +25,10 @@ public class TestFacade {
     public TestResponseDTO.First firstTest(TestRequestDTO dto) {
         return TestResponseDTO.First.first(testService.answerToTest(dto));
     }
+    @Transactional
     public TestResponseDTO.Response firstResultToSave(TestResponseDTO.First dto, String jwt) {
+        if (testService.existsByDateAndMember(memberService.findByJwt(jwt))) {
+            testService.deleteByDateAndMember(memberService.findByJwt(jwt));}
         return TestResponseDTO.Response.toDto(testService.save(dto, memberService.findByJwt(jwt)));
     }
 
