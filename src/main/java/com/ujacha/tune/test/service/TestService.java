@@ -1,6 +1,7 @@
 package com.ujacha.tune.test.service;
 
 import com.ujacha.tune.auth.jwt.TokenProvider;
+import com.ujacha.tune.member.domain.Member;
 import com.ujacha.tune.member.repository.MemberRepository;
 import com.ujacha.tune.test.domain.TestEntity;
 import com.ujacha.tune.test.dto.TestRequestDTO;
@@ -8,7 +9,10 @@ import com.ujacha.tune.test.dto.TestResponseDTO;
 import com.ujacha.tune.test.repository.TestRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,10 +23,14 @@ public class TestService {
     private final TestRepository testRepository;
     private final MemberRepository memberRepository;
     private final TokenProvider tokenProvider;
-
+    @Transactional
     public TestResponseDTO.Response testToResult(TestRequestDTO dto, String jwt) {
+        if (existsByDate(jwt)) {
+            deleteByDate(jwt);
+        }
         TestEntity test = testRepository.save(TestEntity.testToResult(answerToTest(dto),
                 memberRepository.findByUid(tokenProvider.validate(jwt)).orElseThrow()));
+
         return TestResponseDTO.Response.toDto(test);
     }
 
@@ -66,6 +74,22 @@ public class TestService {
         TestEntity test = testRepository.save(TestEntity.testToResult(dto,
                 memberRepository.findByUid(tokenProvider.validate(jwt)).orElseThrow()));
         return TestResponseDTO.Response.toDto(test);
+    }
+
+    public LocalDate nowDay() {
+        return LocalDate.parse(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+    }
+
+    public Boolean existsByDate(String jwt) {
+        return testRepository.existsByDateAndMember(nowDay(), member(jwt));
+    }
+
+    public void deleteByDate(String jwt) {
+        testRepository.deleteByDateAndMember(nowDay(), member(jwt));
+    }
+
+    public Member member(String jwt) {
+        return memberRepository.findByUid(tokenProvider.validate(jwt)).orElseThrow();
     }
 
 }
