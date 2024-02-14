@@ -1,4 +1,4 @@
-package com.ujacha.tune.test.service;
+package com.ujacha.tune.test.service.core;
 
 import com.ujacha.tune.auth.jwt.TokenProvider;
 import com.ujacha.tune.member.domain.Member;
@@ -9,7 +9,6 @@ import com.ujacha.tune.test.dto.TestResponseDTO;
 import com.ujacha.tune.test.repository.TestRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -21,22 +20,6 @@ import java.util.stream.Collectors;
 public class TestService {
 
     private final TestRepository testRepository;
-    private final MemberRepository memberRepository;
-    private final TokenProvider tokenProvider;
-    @Transactional
-    public TestResponseDTO.Response testToResult(TestRequestDTO dto, String jwt) {
-        if (existsByDate(jwt)) {
-            deleteByDate(jwt);
-        }
-        TestEntity test = testRepository.save(TestEntity.testToResult(answerToTest(dto),
-                memberRepository.findByUid(tokenProvider.validate(jwt)).orElseThrow()));
-
-        return TestResponseDTO.Response.toDto(test);
-    }
-
-    public TestResponseDTO.First firstTest(TestRequestDTO dto) {
-        return TestResponseDTO.First.first(answerToTest(dto));
-    }
 
     public TestResponseDTO.Symptom answerToTest(TestRequestDTO dto) {
         TestResponseDTO.Symptom symptom = new TestResponseDTO.Symptom();
@@ -62,34 +45,32 @@ public class TestService {
         };
     }
 
-    public List<TestResponseDTO.Response> listTestEntityToDTo(String jwt) {
-        Long memberId = memberRepository.findByUid(tokenProvider.validate(jwt)).orElseThrow().getId();
+    public List<TestResponseDTO.Response> listTestEntityToDTo(Long memberId) {
         return testRepository.findByMemberId(memberId)
                 .stream()
                 .map(TestResponseDTO.Response::toDto)
                 .collect(Collectors.toList());
     }
 
-    public TestResponseDTO.Response firstResultToSave(TestResponseDTO.First dto, String jwt) {
-        TestEntity test = testRepository.save(TestEntity.testToResult(dto,
-                memberRepository.findByUid(tokenProvider.validate(jwt)).orElseThrow()));
-        return TestResponseDTO.Response.toDto(test);
-    }
 
     public LocalDate nowDay() {
         return LocalDate.parse(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
     }
 
-    public Boolean existsByDate(String jwt) {
-        return testRepository.existsByDateAndMember(nowDay(), member(jwt));
+    public Boolean existsByDateAndMember(Member member) {
+        return testRepository.existsByDateAndMember(nowDay(), member);
     }
 
-    public void deleteByDate(String jwt) {
-        testRepository.deleteByDateAndMember(nowDay(), member(jwt));
+    public void deleteByDateAndMember(Member member) {
+        testRepository.deleteByDateAndMember(nowDay(), member);
     }
 
-    public Member member(String jwt) {
-        return memberRepository.findByUid(tokenProvider.validate(jwt)).orElseThrow();
+    public TestEntity save(TestRequestDTO dto, Member member) {
+        return testRepository.save(TestEntity.testToResult(answerToTest(dto), member));
     }
+    public TestEntity save(TestResponseDTO.First dto, Member member) {
+        return testRepository.save(TestEntity.testToResult(dto, member));
+    }
+
 
 }

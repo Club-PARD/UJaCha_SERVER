@@ -16,8 +16,14 @@ public class MemberRequestDTO {
     @Setter
     public static class FirstLogin {
         private String nickname;
-        private String reliableName;
         private Integer childAge;
         private String uid;
+    }
+    @Getter
+    @Setter
+    public static class MemberUpdate {
+        private String nickname;
+        private String reliableUid;
+        private Integer childAge;
     }
 }
