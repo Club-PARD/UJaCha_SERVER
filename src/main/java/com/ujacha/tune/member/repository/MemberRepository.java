@@ -15,4 +15,6 @@ public interface MemberRepository extends JpaRepository<Member,Long> {
 
     List<Member> findByReliableUid(String uid);
 
+    void deleteByUid(String uid);
+
 }

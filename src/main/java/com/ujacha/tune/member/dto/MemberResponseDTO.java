@@ -16,9 +16,9 @@ public class MemberResponseDTO {
         private boolean isFirst;
         private String token;
         private int exprTime;
-        public static Token toDTO(boolean isFirst,
-                                              String token,
-                                              int exprTime) {
+        public static Token toDTO(final boolean isFirst,
+                                  final String token,
+                                  final int exprTime) {
             return Token.builder()
                     .isFirst(isFirst)
                     .token(token)
@@ -38,7 +38,9 @@ public class MemberResponseDTO {
         private Integer childAge;
         private List<TestResponseDTO.Response> test;
 
-        public static Check toDTO(Member member, List<TestResponseDTO.Response> test, String reliableName) {
+        public static Check toDTO(final Member member,
+                                  final List<TestResponseDTO.Response> test,
+                                  final String reliableName) {
             return Check.builder()
                     .uid(member.getUid())
                     .email(member.getEmail())
@@ -48,7 +50,8 @@ public class MemberResponseDTO {
                     .test(test)
                     .build();
         }
-        public static Check toDTO(Member member, List<TestResponseDTO.Response> test) {
+        public static Check toDTO(final Member member,
+                                  final List<TestResponseDTO.Response> test) {
             return Check.builder()
                     .uid(member.getUid())
                     .email(member.getEmail())

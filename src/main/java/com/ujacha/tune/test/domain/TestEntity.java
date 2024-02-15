@@ -41,7 +41,7 @@ public class TestEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
-    public static TestEntity testToResult(TestResponseDTO.Symptom dto, Member member) {
+    public static TestEntity testToResult(final TestResponseDTO.Symptom dto, final Member member) {
         return TestEntity.builder()
                 .hallucination(dto.getHallucination())
                 .abnormalBehavior(dto.getAbnormalBehavior())
@@ -51,7 +51,7 @@ public class TestEntity {
                 .member(member)
                 .build();
     }
-    public static TestEntity testToResult(TestResponseDTO.First dto, Member member) {
+    public static TestEntity testToResult(final TestResponseDTO.First dto, final Member member) {
         return TestEntity.builder()
                 .hallucination(dto.getHallucination())
                 .abnormalBehavior(dto.getAbnormalBehavior())

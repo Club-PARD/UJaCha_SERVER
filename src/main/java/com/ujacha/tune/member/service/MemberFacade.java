@@ -89,4 +89,9 @@ public class MemberFacade {
                 })
                 .collect(Collectors.toList());
     }
+
+    @Transactional
+    public void delete(String jwt) {
+        memberService.delete(jwt);
+    }
 }

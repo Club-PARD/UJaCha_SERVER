@@ -33,19 +33,19 @@ public class Member {
     private List<TestEntity> test = new ArrayList<>();
 
 
-    public static Member toEntity(MemberRequestDTO.KakaoLogin dto) {
+    public static Member toEntity(final MemberRequestDTO.KakaoLogin dto) {
         return Member.builder()
                 .uid(dto.getUid())
                 .email(dto.getEmail())
                 .build();
     }
 
-    public void firstLoginCategory(MemberRequestDTO.FirstLogin dto) {
+    public void firstLoginCategory(final MemberRequestDTO.FirstLogin dto) {
         this.nickname = dto.getNickname();
         this.childAge = dto.getChildAge();
     }
 
-    public void updateMember(MemberRequestDTO.MemberUpdate dto,String reliableUid) {
+    public void updateMember(final MemberRequestDTO.MemberUpdate dto,String reliableUid) {
         this.nickname = dto.getNickname();
         this.childAge = dto.getChildAge();
         this.reliableUid = reliableUid;

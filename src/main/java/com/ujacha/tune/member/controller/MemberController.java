@@ -44,24 +44,28 @@ public class MemberController {
     @Operation(summary = "회원 조회",
             description = "JWT로 회원을 조회하여 회원정보와 그 회원이 가지고 있는 Test결과를 반환한다.")
     @GetMapping("")
-    public ResponseEntity<MemberResponseDTO.Check> member(@RequestHeader(value = "Authorization" , required = false) String jwt) {
+    public ResponseEntity<MemberResponseDTO.Check> member(@RequestHeader(value = "Authorization", required = false) final String jwt) {
         return ResponseEntity.ok(memberFacade.userCheck(jwt));
     }
 
     @Operation(summary = "회원 업데이트",
             description = "JWT로 회원을 조회하여 회원정보와 Body를 이용하여 회원을 업데이트 합니다.")
     @PatchMapping("/update")
-    public ResponseEntity<String> updateMember(@RequestBody MemberRequestDTO.MemberUpdate dto,
-            @RequestHeader(value = "Authorization" , required = false) String jwt) {
+    public ResponseEntity<String> updateMember(@RequestBody final MemberRequestDTO.MemberUpdate dto,
+            @RequestHeader(value = "Authorization" , required = false) final String jwt) {
         return ResponseEntity.ok(memberFacade.update(dto,jwt));
     }
 
-    @Operation(summary = "회원 업데이트",
-            description = "JWT로 회원을 조회하여 회원정보와 Body를 이용하여 회원을 업데이트 합니다.")
+    @Operation(summary = "믿음직한 사람",
+            description = "나를 믿음직한 사람으로 등록한 사람들의 테스트 결과를 볼 수 있음")
     @GetMapping("/reliable")
-    public List<MemberResponseDTO.Check> reliableName(@RequestHeader(value = "Authorization", required = false) String jwt) {
+    public List<MemberResponseDTO.Check> reliableName(@RequestHeader(value = "Authorization", required = false) final String jwt) {
         return memberFacade.reliableUser(jwt);
     }
 
-
+    @DeleteMapping("/delete")
+    public String delete(@RequestHeader(value = "Authorization") final String jwt) {
+        memberFacade.delete(jwt);
+        return "삭제 완료!";
+    }
 }

@@ -47,7 +47,7 @@ public class TestResponseDTO {
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
         private LocalDate date;
 
-        public static Response toDto(TestEntity test) {
+        public static Response toDto(final TestEntity test) {
             return Response.builder()
                     .testId(test.getTestId())
                     .hallucination(test.getHallucination())
@@ -74,7 +74,7 @@ public class TestResponseDTO {
         private int delusion;
 
         private int total;
-        public static First first(TestResponseDTO.Symptom dto) {
+        public static First first(final TestResponseDTO.Symptom dto) {
             return First.builder()
                     .hallucination(dto.getHallucination())
                     .abnormalBehavior(dto.getAbnormalBehavior())
