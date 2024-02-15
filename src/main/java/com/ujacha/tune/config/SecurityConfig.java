@@ -1,4 +1,4 @@
-package com.ujacha.tune.auth.config;
+package com.ujacha.tune.config;
 
 import com.ujacha.tune.auth.jwt.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;

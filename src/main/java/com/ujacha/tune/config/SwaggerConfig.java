@@ -1,4 +1,4 @@
-package com.ujacha.tune.auth.config;
+package com.ujacha.tune.config;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.models.Components;
