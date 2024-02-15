@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -46,8 +47,11 @@ public class MemberService {
     }
 
     public Member findByJwt(String jwt) {
-        return memberRepository.findByUid(tokenProvider.validate(jwt))
-                .orElseThrow(() -> new NoSuchElementException("해당 uid 가진 회원을 찾을 수 없습니다.: "+ tokenProvider.validate(jwt)));
+        return memberRepository.findByUid(jwtValidate(jwt))
+                .orElseThrow(() -> new NoSuchElementException("해당 uid 가진 회원을 찾을 수 없습니다.: "+ jwtValidate(jwt)));
+    }
+    public String jwtValidate(String jwt) {
+        return tokenProvider.validate(jwt);
     }
 
     public String userIdToName(String uid) {
@@ -55,10 +59,16 @@ public class MemberService {
     }
 
     public String nameToUserId(String name) {
-        return findByName(name).getNickname();
+        return findByName(name).getUid();
     }
 
     public boolean existsByUid(String uid) {
         return memberRepository.existsByUid(uid);
     }
+
+    public List<Member> findByReliableUid(String uid) {
+        return memberRepository.findByReliableUid(uid);
+    }
+
+
 }

@@ -7,8 +7,13 @@ import com.ujacha.tune.member.service.core.MemberService;
 import com.ujacha.tune.test.service.core.TestService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -44,10 +49,19 @@ public class MemberFacade {
                         3600000);
     }
 
+
+
     public MemberResponseDTO.Check userCheck(String jwt) {
         Member member =memberService.findByJwt(jwt);
-        return MemberResponseDTO.Check
-                .toDTO(member, testService.listTestEntityToDTo(member.getId()));
+        if (StringUtils.hasText(member.getReliableUid())) {
+            return MemberResponseDTO.Check
+                    .toDTO(member,
+                            testService.listTestEntityToDTo(member.getId()),
+                            memberService.userIdToName(member.getReliableUid()));
+        }
+        return MemberResponseDTO.Check.toDTO(member,
+                testService.listTestEntityToDTo(member.getId()));
+
     }
     public boolean nicknameDuplicate(String nickname) {
         return memberService.nicknameDuplicate(nickname);
@@ -56,8 +70,23 @@ public class MemberFacade {
     @Transactional
     public String update(MemberRequestDTO.MemberUpdate dto, String jwt) {
         Member member = memberService.findByJwt(jwt);
-        member.updateMember(dto);
+        member.updateMember(dto,memberService.nameToUserId(dto.getReliableName()));
         return "업데이트 성공!";
     }
 
+    public List<MemberResponseDTO.Check> reliableUser(String jwt) {
+        List < Member > members = memberService.findByReliableUid(memberService.jwtValidate(jwt));
+        return members.stream()
+                .map(member -> {
+                    if (StringUtils.hasText(member.getReliableUid())) {
+                        return MemberResponseDTO.Check.toDTO(member,
+                                testService.listTestEntityToDTo(member.getId()),
+                                memberService.userIdToName(member.getReliableUid()));
+                    } else {
+                        return MemberResponseDTO.Check.toDTO(member,
+                                testService.listTestEntityToDTo(member.getId()));
+                    }
+                })
+                .collect(Collectors.toList());
+    }
 }

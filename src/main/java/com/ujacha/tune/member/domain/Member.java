@@ -26,7 +26,7 @@ public class Member {
     private String email;
     @Column(unique = true)
     private String nickname;
-    private String reliableName;
+    private String reliableUid;
     private Integer childAge;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -45,9 +45,9 @@ public class Member {
         this.childAge = dto.getChildAge();
     }
 
-    public void updateMember(MemberRequestDTO.MemberUpdate dto) {
+    public void updateMember(MemberRequestDTO.MemberUpdate dto,String reliableUid) {
         this.nickname = dto.getNickname();
         this.childAge = dto.getChildAge();
-        this.reliableName = dto.getReliableName();
+        this.reliableUid = reliableUid;
     }
 }

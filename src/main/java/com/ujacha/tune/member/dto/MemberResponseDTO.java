@@ -38,12 +38,22 @@ public class MemberResponseDTO {
         private Integer childAge;
         private List<TestResponseDTO.Response> test;
 
+        public static Check toDTO(Member member, List<TestResponseDTO.Response> test, String reliableName) {
+            return Check.builder()
+                    .uid(member.getUid())
+                    .email(member.getEmail())
+                    .nickname(member.getNickname())
+                    .reliableName(reliableName)
+                    .childAge(member.getChildAge())
+                    .test(test)
+                    .build();
+        }
         public static Check toDTO(Member member, List<TestResponseDTO.Response> test) {
             return Check.builder()
                     .uid(member.getUid())
                     .email(member.getEmail())
                     .nickname(member.getNickname())
-                    .reliableName(member.getReliableName())
+                    .reliableName(member.getReliableUid())
                     .childAge(member.getChildAge())
                     .test(test)
                     .build();
