@@ -9,7 +9,7 @@
 <h3 align = "center"> 조현병 조기 진단 서비스, tune </h3>
 
 
-
+<br/>
 
 ## ⚙️ 기술 스택
 
@@ -20,6 +20,7 @@
 <br>
 
 ## 💽 자료구조
+<br/>
 
 ### member
     member_id (PK) (BIGINT) (AUTO_INCREMENT)
@@ -29,6 +30,7 @@
     reliable_uid (VARCHAR(255))
     child_age (INT)
 
+<br/>
 
 ### test
     test_id (PK) (INT) (AUTO_INCREMENT)
@@ -41,11 +43,14 @@
     
     member_id (BIGINT) (FK)
 
+<br/>
 
 ## 📌 주요 기능
+<br/>
 
 ### 🔗URL
 [API SWAGGER](http://ec2-3-34-143-183.ap-northeast-2.compute.amazonaws.com:8080/swagger-ui/index.html#/member%20%EC%BB%A8%ED%8A%B8%EB%A1%A4%EB%9F%AC/updateMember)
+<br/>
 
 ### 👨‍👩‍👦‍👦Member
  <details markdown = "1">
@@ -242,6 +247,7 @@ boolean
   </ul>
  </details>
 
+<br/>
 
 ### ✍️ Test
 
