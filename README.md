@@ -13,9 +13,9 @@
 
 ## ⚙️ 기술 스택
 
-|  Spring    |  AWS_EC2  |  MySQL    |  MySQL    | 
-| :--------: | :-------: | :-------: | :-------: |
-|   ![sp]    |   ![ec2]  |   ![pm]   |   ![pm]   |
+|  Spring    |  AWS_EC2  |  MySQL    | 
+| :--------: | :-------: | :-------: | 
+|   ![sp]    |   ![ec2]  |   ![pm]   | 
 
 <br>
 
@@ -44,37 +44,30 @@
 
 ## 📌 주요 기능
 
-###  🔗Auth
+### 🔗URL
+[API SWAGGER](http://ec2-3-34-143-183.ap-northeast-2.compute.amazonaws.com:8080/swagger-ui/index.html#/member%20%EC%BB%A8%ED%8A%B8%EB%A1%A4%EB%9F%AC/updateMember)
+
+### 👨‍👩‍👦‍👦Member
  <details markdown = "1">
-  <summary>로그인 : api/user/signIn  (POST)</summary>
+  <summary>로그인 : api/member/login  (POST)</summary>
     <ul>
       <li>Request body</li>
       
 ```json
 {
-	"userKakaoId" : "사용자의 카카오 아이디"
-	"kakaoAccessToken":"카카오가 발급하는 Token값"
+  "email": "string",
+  "uid": "string"
 }
 ```
 
   <li>Response body </li>  
 
 ```json
-      {
-    "result": true,
-    "message": "Sign In Success",
-    "data": {
-        "token": "JWT 토큰",
-        "exprTime": 3600000,
-        "user": {
-            "userKakaoId": "사용자의 카카오 아이디",
-            "userKakaoNickname": "사용자1",
-            "userAge": 25,
-            "userFanclub": "팬클럽A",
-            "userImage": null
-        }
-    }
-}      
+{
+  "token": "string",
+  "exprTime": 0,
+  "first": true
+}    
 ```
 
   </ul>
