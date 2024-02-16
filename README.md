@@ -2,7 +2,7 @@
 
 <p align="center">
   <br>
-  <img src="./readme/Tune.svg">
+  <img src="./readme/Tune.png">
   <br>
 </p>
 
@@ -358,4 +358,4 @@ boolean
 
 [sp]: /readme/spring.png
 [ec2]: /readme/EC2.png
-[pm]: /readme/postman.png
+[pm]: /readme/mysql.png
