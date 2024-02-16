@@ -204,7 +204,7 @@ string(token 값)
  </details>
 
  <details markdown = "1">
-  <summary>닉네임 중복확인 : api/member/duplicate  (GET)</summary>
+  <summary>닉네임 중복확인 : api/member/duplicate  (GET)</summary>
     <ul>
      <li>RequestParam</li>
       
@@ -222,7 +222,7 @@ boolean
  </details>
 
 <details markdown = "1">
-  <summary>멤버 삭제 : api/member/delete  (DELETE)</summary>
+  <summary>멤버 삭제 : api/member/delete  (DELETE)</summary>
     <ul>
      <li>Request header</li>
       
