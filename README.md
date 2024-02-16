@@ -74,27 +74,52 @@
  </details>
   
  <details markdown = "1">
-  <summary>회원가입 : api/user/signUp  (POST)</summary>
+  <summary>회원가입 : api/member/first (POST)</summary>
     <ul>
       <li>Request body</li>
       
 ```json
 {
-    "userKakaoId" : "201806142",
-    "userKakaoNickname" : "김현승",
-    "userFanclub":"세븐틴",
-    "userImage" : "이미지"
+  "nickname": "string",
+  "childAge": 0,
+  "uid": "string"
+}
+```
+
+  <li>Response body </li>  
+
+```
+string(token 값)
+```
+
+  </ul>
+ </details>
+
+ <details markdown = "1">
+  <summary>업데이트 : api/member/update  (POST)</summary>
+    <ul>
+     <li>Request header</li>
+      
+```json
+{
+  "Authorization": "String",
+  "Content-Type": "application/json"
+}
+```
+      <li>Request body</li>
+      
+```json
+{
+  "nickname": "string",
+  "reliableName": "string",
+  "childAge": 0
 }
 ```
 
   <li>Response body </li>  
 
 ```json
-{
-    "result": true,
-    "message": "Sign Up Success!",
-    "data": null
-}    
+업데이트 성공  
 ```
 
   </ul>
