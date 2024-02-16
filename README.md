@@ -332,7 +332,7 @@ boolean
   </details>
 
  <details markdown = "1">
-  <summary>보드 하나 읽기 :api/board/oneList/{id}(GET)</summary>
+  <summary>오늘 테스트 했는지 안 했는지 확인 :api/test/exist-today (GET)</summary>
     <ul>
       <li>Request Header</li>
       
