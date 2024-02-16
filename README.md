@@ -106,7 +106,8 @@ string(token 값)
   "Content-Type": "application/json"
 }
 ```
-      <li>Request body</li>
+
+<li>Request body</li>
       
 ```json
 {
@@ -119,11 +120,128 @@ string(token 값)
   <li>Response body </li>  
 
 ```json
-업데이트 성공  
+   "업데이트 성공"  
 ```
 
   </ul>
  </details>
+
+ <details markdown = "1">
+  <summary>회원 조회 : api/member  (GET)</summary>
+    <ul>
+     <li>Request header</li>
+      
+```json
+{
+  "Authorization": "String",
+  "Content-Type": "application/json"
+}
+```
+
+  <li>Response body </li>  
+
+```json
+{
+  "uid": "string",
+  "email": "string",
+  "nickname": "string",
+  "reliableName": "string",
+  "childAge": 0,
+  "test": [
+    {
+      "testId": 0,
+      "hallucination": 0,
+      "abnormalBehavior": 0,
+      "moody": 0,
+      "delusion": 0,
+      "total": 0,
+      "date": "2024-02-16"
+    }
+  ]
+} 
+```
+
+  </ul>
+ </details>
+
+
+ <details markdown = "1">
+  <summary>남의 정보 조회 : api/member/reliable  (GET)</summary>
+    <ul>
+     <li>Request header</li>
+      
+```json
+{
+  "Authorization": "String",
+  "Content-Type": "application/json"
+}
+```
+
+  <li>Response body </li>  
+
+```json
+{
+  "uid": "string",
+  "email": "string",
+  "nickname": "string",
+  "reliableName": "string",
+  "childAge": 0,
+  "test": [
+    {
+      "testId": 0,
+      "hallucination": 0,
+      "abnormalBehavior": 0,
+      "moody": 0,
+      "delusion": 0,
+      "total": 0,
+      "date": "2024-02-16"
+    }
+  ]
+} 
+```
+
+  </ul>
+ </details>
+
+ <details markdown = "1">
+  <summary>닉네임 중복확인 : api/member/duplicate  (GET)</summary>
+    <ul>
+     <li>RequestParam</li>
+      
+```
+?name="string
+```
+
+  <li>Response body </li>  
+
+```
+boolean
+```
+
+  </ul>
+ </details>
+
+<details markdown = "1">
+  <summary>멤버 삭제 : api/member/delete  (DELETE)</summary>
+    <ul>
+     <li>Request header</li>
+      
+```json
+{
+  "Authorization": "String",
+  "Content-Type": "application/json"
+}
+```
+
+  <li>Response body </li>  
+
+```
+"삭제 되었습니다."
+```
+
+  </ul>
+ </details>
+
 
 ### 🔗 Board
 
