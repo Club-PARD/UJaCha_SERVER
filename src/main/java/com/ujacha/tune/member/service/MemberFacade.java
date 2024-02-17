@@ -70,7 +70,11 @@ public class MemberFacade {
     @Transactional
     public String update(MemberRequestDTO.MemberUpdate dto, String jwt) {
         Member member = memberService.findByJwt(jwt);
-        member.updateMember(dto,memberService.nameToUserId(dto.getReliableName()));
+        if (!dto.getNickname().equals(member.getNickname())) {
+            member.updateMember(dto, memberService.nameToUserId(dto.getReliableName()));
+        } else {
+            member.updateMember(dto.getChildAge(),memberService.nameToUserId(dto.getReliableName()));
+        }
         return "업데이트 성공!";
     }
 
