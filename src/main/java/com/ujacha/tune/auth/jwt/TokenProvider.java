@@ -29,14 +29,13 @@ public class TokenProvider {
         if (!StringUtils.hasText(token)) {
             throw new IllegalArgumentException("Token must not be null or empty");
         }
-        String token1 = token;
-        if(token1.startsWith("Bearer ")) {
-            token1 = token1.substring(7);
+        if(token.startsWith("Bearer ")) {
+            token = token.substring(7);
         }
         Claims claims = Jwts.parserBuilder()
                 .setSigningKey(SECURITY_KEY)
                 .build()
-                .parseClaimsJws(token1)
+                .parseClaimsJws(token)
                 .getBody();
         return claims.getSubject();
     }
