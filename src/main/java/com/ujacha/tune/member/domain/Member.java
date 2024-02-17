@@ -50,4 +50,8 @@ public class Member {
         this.childAge = dto.getChildAge();
         this.reliableUid = reliableUid;
     }
+    public void updateMember(final Integer childAge,String reliableUid) {
+        this.childAge = childAge;
+        this.reliableUid = reliableUid;
+    }
 }
