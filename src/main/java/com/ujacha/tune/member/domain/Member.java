@@ -54,4 +54,8 @@ public class Member {
         this.childAge = childAge;
         this.reliableUid = reliableUid;
     }
+
+    public void setReliableUidToNull() {
+        this.reliableUid = null;
+    }
 }

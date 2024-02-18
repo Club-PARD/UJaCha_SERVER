@@ -7,7 +7,6 @@ import com.ujacha.tune.member.service.core.MemberService;
 import com.ujacha.tune.test.service.core.TestService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -96,6 +95,13 @@ public class MemberFacade {
 
     @Transactional
     public void delete(String jwt) {
-        memberService.delete(jwt);
+        Member member = memberService.findByJwt(jwt);
+        reliableNameNull(memberService.findByReliableUid(member.getUid()));
+        memberService.delete(member);
+    }
+
+    public void reliableNameNull(List<Member> members) {
+        members.forEach(Member::setReliableUidToNull);
+
     }
 }

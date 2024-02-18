@@ -70,7 +70,8 @@ public class MemberService {
         return memberRepository.findByReliableUid(uid);
     }
 
-    public void delete(String jwt){
-        memberRepository.deleteByUid(jwtValidate(jwt));
+    public void delete(Member member){
+        memberRepository.deleteByUid(member.getUid());
     }
+
 }
