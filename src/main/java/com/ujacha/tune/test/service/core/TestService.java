@@ -19,6 +19,7 @@ public class TestService {
 
     private final TestRepository testRepository;
 
+    //List로 받아오도록 해보기
     public TestResponseDTO.Symptom answerToTest(TestRequestDTO dto) {
         TestResponseDTO.Symptom symptom = new TestResponseDTO.Symptom();
         symptom.setHallucination(testAverage(dto.getQuestion1(),dto.getQuestion2(),dto.getQuestion3()));
@@ -27,6 +28,7 @@ public class TestService {
         symptom.setDelusion(testAverage(dto.getQuestion10(),dto.getQuestion11(),dto.getQuestion12()));
         return symptom;
     }
+    //List로 받아오도록 해보기
     public int testAverage(int question1, int question2, int question3) {
         return (answer(question1) * 33 +
                 answer(question2) * 33 +
